@@ -28,6 +28,7 @@
 "iic_server\stm32f1xx_hal_uart.o"
 "iic_server\system_stm32f1xx.o"
 "iic_server\led.o"
+"iic_server\led_rgb.o"
 "iic_server\control.o"
 "iic_server\protocol .o"
 "iic_server\hsv.o"

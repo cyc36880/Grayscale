@@ -41,10 +41,13 @@ enum CONTROL_SW {
 };
 
 
-#define VAL4096_2_255(x) ((uint32_t)x*255/4096)
+#define VAL4096_2_255(x) ((uint32_t)x*255/4095)
 
 #define SENSORE_NUM   6   //传感器路数
+
 #define DEFAULT_LIGHT 100 //默认亮度
+#define MAX_LIGHT 255
+
 
 extern lv_color_hsv_t Light_HSV[6]; //六路hsv
 extern lv_color_rgb_t Light_RGB[6]; //六路rgb
@@ -59,7 +62,6 @@ extern Control_t control; //控制句柄
  * @return {*}
  */
 void setLinght(uint8_t r, uint8_t g, uint8_t b);
-
 
 void setup(void);
 void loop(void);

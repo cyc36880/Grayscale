@@ -20,7 +20,7 @@ typedef struct
 extern BinVal_t BinValControl; //二值识别控制句柄
 extern uint8_t bincolor[SENSORE_NUM];
 
-
+void BinVal_Init(void);
 void study_BinVal(uint8_t light);
 void color_Bin(uint8_t light);
 

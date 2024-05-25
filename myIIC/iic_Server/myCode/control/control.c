@@ -2,12 +2,12 @@
  * @LastEditors: 蔡雅超
  * @Date: 2024-03-16 16:32:44
  * @LastEditTime: 2024-04-03 17:39:31
- * @FilePath: \MDK-ARMd:\Desktop\iic_Server\myCode\control\control.c
  */
 #include "control.h"
 
 #include <stdio.h>
 
+#include "usart.h"
 #include "adc.h"
 #include "tim.h"
 #include "i2c.h"
@@ -16,6 +16,7 @@
 #include "flash.h"
 
 #include "LED.h"
+#include "LED_RGB.h"
 
 #include "color.h"
 #include "Grayscale.h"
@@ -47,10 +48,18 @@ void setup(void)
 	HAL_ADCEx_Calibration_Start(&hadc1); //校准
 	HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcVal, SENSORE_NUM); //开启adc 
 
+	flash_Init();
+
 	LED_Init(); 
 	Control_Init();
 	ServerI2C_Init(); //初始化从机iic
+
+	Grayscale_Init();
+	BinVal_Init();
 	color_init();
+
+	// 白 青 品红 蓝 
+	LED_RBG_SET(SecAlaveAddrPos); //显示rbg颜色根据设备地址
 }
 
 
@@ -60,6 +69,8 @@ void loop(void)
 	Control_Run();
 	KeyControl();
 }
+
+
 
 
 /**
@@ -80,7 +91,6 @@ void setLinght(uint8_t r, uint8_t g, uint8_t b)
 static void Control_Init(void)
 {
 	TXTragetBuf_Select(control.sw);
-	
 }
 
 
@@ -88,7 +98,6 @@ static void KeyControl(void)
 {
 	if(HAL_GPIO_ReadPin(SW_GPIO_Port, SW_Pin) == GPIO_PIN_RESET)
 	{
-
 		HAL_Delay(10);
 		if(HAL_GPIO_ReadPin(SW_GPIO_Port, SW_Pin) == GPIO_PIN_RESET)
 		{
@@ -97,6 +106,9 @@ static void KeyControl(void)
 			{
 				HAL_Delay(10);
 				if(count < 100 * 3) count++;
+				else {
+					break;
+				}
 			}
 			
 			if(count < 100 * 3) // 短按
@@ -112,9 +124,15 @@ static void KeyControl(void)
 			else
 			{
 				if(++SecAlaveAddrPos >= 4) SecAlaveAddrPos=0;
-				Write_Flash_Data(SecAlaveAddrPos);
+				LED_RBG_SET(SecAlaveAddrPos);
+				// 更新设备地址
+				get_flash_buf()[0] = SecAlaveAddrPos;
+				updata_flash();
+
 				I2C_Slave_Rest();
 			}
+
+			while(HAL_GPIO_ReadPin(SW_GPIO_Port, SW_Pin) == GPIO_PIN_RESET);
 		}
 	}
 }
@@ -169,24 +187,27 @@ static void TXTragetBuf_Select(uint8_t sw)
 {
 	switch(sw)
 	{
-	  case 1:
+		case 1:
 			control.TXBuf = color;
-			break;
+		break;
+
 		case 2:
 			control.TXBuf = GrayVal;
-			break;
+		break;
+
 		case 3:
 			control.TXBuf = bincolor;
-			break;
+		break;
+
 		default :
 			control.TXBuf = NoDateBuf;
-			break;
+		break;
 	}
 }
 
 void control_iic_tx_CpltCallback(void)
 {
-	// printf("sw:%d %d %d %d %d %d %d \r\n", control.sw, control.TXBuf[0], control.TXBuf[1], control.TXBuf[2], control.TXBuf[3], control.TXBuf[4], control.TXBuf[5]);
+	
 }
 void control_iic_rx_CpltCallback(void)
 {

@@ -16,14 +16,14 @@
 #include "flash.h"
 
 const uint8_t SecAlaveAddrArray[4] = {0x71, 0x72, 0x73, 0x74}; //需要切换的地址
-uint8_t SecAlaveAddrPos = 0;
+uint8_t SecAlaveAddrPos = 0; // 当前地址
 
 
 
 
 void ServerI2C_Init(void)
 {
-	uint16_t dat = Get_Flash_Data();
+	uint16_t dat = get_flash_buf()[0];
 	if(dat >= 4) SecAlaveAddrPos = 0;
 	else SecAlaveAddrPos = dat;
 	
@@ -90,6 +90,7 @@ void HAL_I2C_SlaveTxCpltCallback(I2C_HandleTypeDef *hi2c)  //全部发送完成�
 {
 	control_iic_tx_CpltCallback();
 }
+
 void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c)  //全部接收完成回调
 {
 	control_iic_rx_CpltCallback();

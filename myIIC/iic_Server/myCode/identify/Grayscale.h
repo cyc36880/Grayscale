@@ -19,10 +19,22 @@ typedef struct
 }Grayscale_t;
 
 
+typedef struct 
+{
+   uint8_t maxVal;
+   uint8_t minVal;
+   int16_t MedianVal;
+   float zoom;
+   uint8_t offset;
+}Grayscale_Port;
+
+
 extern Grayscale_t GrayControl; //灰度控制句柄
 extern uint8_t GrayVal[SENSORE_NUM];
 
+extern Grayscale_Port Grayscale_Port_param[6];
 
+void Grayscale_Init(void);
 void study_Grayscale(uint8_t r, uint8_t g, uint8_t b);
 void color_Grayscale(uint8_t r, uint8_t g, uint8_t b);
 

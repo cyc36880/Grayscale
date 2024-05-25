@@ -14,6 +14,7 @@
         "led.h": "c",
         "sys.h": "c",
         "stdlib.h": "c",
-        "flash.h": "c"
+        "flash.h": "c",
+        "led_rgb.h": "c"
     }
 }

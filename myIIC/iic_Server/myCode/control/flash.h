@@ -14,8 +14,14 @@
 #define MemoryPage 63
 
 
-uint16_t Get_Flash_Data(void);
-void Write_Flash_Data(uint16_t data);
+
+void flash_Init(void);
+
+uint16_t *get_flash_buf(void);
+void updata_flash(void);
+
+// uint16_t Get_Flash_Data(void);
+// void Write_Flash_Data(uint16_t data);
 
 #endif
 

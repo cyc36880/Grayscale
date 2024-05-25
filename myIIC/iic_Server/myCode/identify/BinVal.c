@@ -6,21 +6,38 @@
  */
 #include "BinVal.h"
 
+#include "Grayscale.h"
+
 #include "stdio.h"
 
 /**
  * 二值识别，只能识别 黑线 白底
+ * 
+ * 把二值识别 当成 灰度值识别的一种特殊情况处理
+ * 
+ * 
 */
 
 BinVal_t BinValControl = 
 {
     .studyFlag = 0,
-    .Light = DEFAULT_LIGHT,
+    .Light = MAX_LIGHT,
 }; //二值识别控制句柄
 
 uint8_t bincolor[SENSORE_NUM] = {0};
-static uint8_t MaxBinC = 255, MinBinC = 0;
-static uint8_t MedianVal = 125; //不训练时，至少给个默认阈值
+// static uint8_t MaxBinC = 255, MinBinC = 0;
+// static uint8_t MedianVal = 125; //不训练时，至少给个默认阈值
+
+
+
+// 在flash中更新数据
+void BinVal_Init(void)
+{
+
+}
+
+
+
 
 /**
  * @description: 二值识别训练
@@ -29,48 +46,18 @@ static uint8_t MedianVal = 125; //不训练时，至少给个默认阈值
  */
 void study_BinVal(uint8_t light)
 {
-    MaxBinC = 0;   //学习时重置阈值
-    MinBinC = 255;
-
-    uint32_t tickstart = HAL_GetTick();
-    uint32_t wait = 1000 * 5;
-    if (wait < HAL_MAX_DELAY)
-    {
-        wait += (uint32_t)(uwTickFreq);
-    }
-    while ((HAL_GetTick() - tickstart) < wait) //
-    {
-        setLinght(light, light, light); //点亮
-        HAL_Delay(1);//转换时长
-        for (uint8_t i = 0; i < SENSORE_NUM; i++)
-        {
-            if (VAL4096_2_255(adcVal[i]) > MaxBinC)
-                MaxBinC = VAL4096_2_255(adcVal[i]);
-            if (VAL4096_2_255(adcVal[i]) < MinBinC)
-                MinBinC = VAL4096_2_255(adcVal[i]);
-        }
-        HAL_Delay(15); //增加训练的视觉感受
-        setLinght(0, 0, 0); //
-        HAL_Delay(15); //增加训练的视觉感受
-    }
-    MedianVal = (MaxBinC + MinBinC) / 2; //计算中值
+    study_Grayscale(light, light, light);
 }
 
 
 void color_Bin(uint8_t light)
 {
-    setLinght(light, light, light); //点亮
-    HAL_Delay(1);
-    for (uint8_t i = 0; i < SENSORE_NUM; i++)
+    color_Grayscale(light, light, light);
+
+    for(uint8_t i=0; i<SENSORE_NUM; i++)
     {
-        if (VAL4096_2_255(adcVal[i]) > MedianVal)
-            bincolor[i] = 0;
-        else
-            bincolor[i] = 1;
+        bincolor[i] = GrayVal[i]>170 ? 1 : 0;
     }
-    HAL_Delay(1);
-//    printf("adc %d %d %d %d %d %d\r\n", adcVal[0], adcVal[1], adcVal[2], adcVal[3], adcVal[4], adcVal[5]);
-//    printf("bin %d %d %d %d %d %d\r\n", bincolor[0], bincolor[1], bincolor[2], bincolor[3], bincolor[4], bincolor[5]);
 }
 
 

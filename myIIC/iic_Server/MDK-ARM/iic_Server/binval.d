@@ -34,4 +34,5 @@ iic_server\binval.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 iic_server\binval.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 iic_server\binval.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 iic_server\binval.o: ../myCode/control/hsv.h
+iic_server\binval.o: ..\myCode\identify\Grayscale.h
 iic_server\binval.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

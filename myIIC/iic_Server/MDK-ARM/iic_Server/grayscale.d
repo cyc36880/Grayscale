@@ -34,5 +34,6 @@ iic_server\grayscale.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex
 iic_server\grayscale.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 iic_server\grayscale.o: ../myCode/control/control.h
 iic_server\grayscale.o: ../myCode/control/hsv.h
+iic_server\grayscale.o: ../myCode/control/flash.h
 iic_server\grayscale.o: ..\myCode\identify\color.h
 iic_server\grayscale.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

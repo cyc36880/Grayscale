@@ -3,20 +3,21 @@
         {
             "name": "iic_Server",
             "includePath": [
-                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server\\Core\\Inc",
-                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server\\Drivers\\STM32F1xx_HAL_Driver\\Inc",
-                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
-                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
-                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server\\Drivers\\CMSIS\\Include",
-                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server\\myCode\\hardware\\LED",
-                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server\\myCode\\control",
-                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server\\myCode\\identify",
-                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server\\myCode\\SYSTEM",
+                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server_2\\Core\\Inc",
+                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server_2\\Drivers\\STM32F1xx_HAL_Driver\\Inc",
+                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server_2\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
+                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server_2\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
+                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server_2\\Drivers\\CMSIS\\Include",
+                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server_2\\myCode\\hardware\\LED",
+                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server_2\\myCode\\control",
+                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server_2\\myCode\\identify",
+                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server_2\\myCode\\SYSTEM",
+                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server_2\\myCode\\hardware\\RGB",
                 "D:\\Keil_v5\\ARM\\ARMCC\\include",
                 "D:\\Keil_v5\\ARM\\ARMCC\\include\\rw",
-                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server\\MDK-ARM",
-                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server\\Core\\Src",
-                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server\\Drivers\\STM32F1xx_HAL_Driver\\Src"
+                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server_2\\MDK-ARM",
+                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server_2\\Core\\Src",
+                "e:\\资料\\公司\\艾克瑞特\\灰度\\pro\\myIIC\\iic_Server_2\\Drivers\\STM32F1xx_HAL_Driver\\Src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

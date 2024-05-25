@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../myCode/hardware/LED;../myCode/control;../myCode/identify;../myCode/SYSTEM</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../myCode/hardware/LED;../myCode/control;../myCode/identify;../myCode/SYSTEM;../myCode/hardware/RGB</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -803,6 +803,11 @@
               <FileName>LED.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\myCode\hardware\LED\LED.c</FilePath>
+            </File>
+            <File>
+              <FileName>LED_RGB.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\hardware\RGB\LED_RGB.c</FilePath>
             </File>
           </Files>
         </Group>

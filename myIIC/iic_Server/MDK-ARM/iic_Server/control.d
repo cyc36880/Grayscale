@@ -34,12 +34,14 @@ iic_server\control.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 iic_server\control.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 iic_server\control.o: ..\myCode\control\hsv.h
 iic_server\control.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+iic_server\control.o: ../Core/Inc/usart.h
 iic_server\control.o: ../Core/Inc/adc.h
 iic_server\control.o: ../Core/Inc/tim.h
 iic_server\control.o: ../Core/Inc/i2c.h
 iic_server\control.o: ..\myCode\control\Protocol.h
 iic_server\control.o: ..\myCode\control\flash.h
 iic_server\control.o: ../myCode/hardware/LED/LED.h
+iic_server\control.o: ../myCode/hardware/RGB/LED_RGB.h
 iic_server\control.o: ../myCode/identify/color.h
 iic_server\control.o: ../myCode/identify/Grayscale.h
 iic_server\control.o: ../myCode/identify/BinVal.h
