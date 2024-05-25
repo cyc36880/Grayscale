@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "*.cpp": "cpp",
+        "i2c.h": "c",
+        "hsv.h": "c",
+        "control.h": "c",
+        "tim.h": "c",
+        "protocol.h": "c",
+        "color.h": "c",
+        "stdio.h": "c",
+        "grayscale.h": "c",
+        "binval.h": "c",
+        "main.h": "c",
+        "led.h": "c",
+        "sys.h": "c",
+        "stdlib.h": "c",
+        "flash.h": "c"
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.cpp": "cpp",
+        "flash_if.h": "c",
+        "menu.h": "c"
+    }
+}
