@@ -43,17 +43,17 @@ Grayscale_t GrayControl =
 // static uint8_t offset = 0;
 
 Grayscale_Port Grayscale_Port_param[6] = {
-    {.maxVal=255, .minVal=0, .MedianVal=127, .zoom=1.0, .offset=0},
-    {.maxVal=255, .minVal=0, .MedianVal=127, .zoom=1.0, .offset=0},
-    {.maxVal=255, .minVal=0, .MedianVal=127, .zoom=1.0, .offset=0},
-    {.maxVal=255, .minVal=0, .MedianVal=127, .zoom=1.0, .offset=0},
-    {.maxVal=255, .minVal=0, .MedianVal=127, .zoom=1.0, .offset=0},
-    {.maxVal=255, .minVal=0, .MedianVal=127, .zoom=1.0, .offset=0},
+    {.maxVal=4095, .minVal=0, .MedianVal=2047, .zoom=1.0, .offset=0},
+    {.maxVal=4095, .minVal=0, .MedianVal=2047, .zoom=1.0, .offset=0},
+    {.maxVal=4095, .minVal=0, .MedianVal=2047, .zoom=1.0, .offset=0},
+    {.maxVal=4095, .minVal=0, .MedianVal=2047, .zoom=1.0, .offset=0},
+    {.maxVal=4095, .minVal=0, .MedianVal=2047, .zoom=1.0, .offset=0},
+    {.maxVal=4095, .minVal=0, .MedianVal=2047, .zoom=1.0, .offset=0},
 };
 
 
 
-static int16_t Grayscale[SENSORE_NUM] = {0};
+static int32_t Grayscale[SENSORE_NUM] = {0};
 // 识别后的n路灰度值
 uint8_t GrayVal[SENSORE_NUM] = {0};
 
@@ -109,7 +109,7 @@ void study_Grayscale(uint8_t r, uint8_t g, uint8_t b)
     for(uint8_t i=0; i<SENSORE_NUM; i++)
     {
         Grayscale_Port_param[i].maxVal = 0;
-        Grayscale_Port_param[i].minVal = 255;
+        Grayscale_Port_param[i].minVal = 4095;
     }
 
     uint32_t tickstart = HAL_GetTick();
@@ -124,10 +124,10 @@ void study_Grayscale(uint8_t r, uint8_t g, uint8_t b)
         HAL_Delay(1);
         for(uint8_t i = 0; i < SENSORE_NUM; i++)
         {
-            if (VAL4096_2_255(adcVal[i]) > Grayscale_Port_param[i].maxVal)
-                Grayscale_Port_param[i].maxVal = VAL4096_2_255(adcVal[i]);
-            if (VAL4096_2_255(adcVal[i]) < Grayscale_Port_param[i].minVal)
-                Grayscale_Port_param[i].minVal = VAL4096_2_255(adcVal[i]);
+            if (adcVal[i] > Grayscale_Port_param[i].maxVal)
+                Grayscale_Port_param[i].maxVal = adcVal[i];
+            if ((adcVal[i])< Grayscale_Port_param[i].minVal)
+                Grayscale_Port_param[i].minVal = adcVal[i];
         }
 
         HAL_Delay(15); //增加训练的视觉感受
@@ -136,7 +136,7 @@ void study_Grayscale(uint8_t r, uint8_t g, uint8_t b)
     }
     for(uint8_t i = 0; i < SENSORE_NUM; i++)
     {
-        Grayscale_Port_param[i].zoom = 255.0f / (Grayscale_Port_param[i].maxVal - Grayscale_Port_param[i].minVal); //计算缩放比例
+        Grayscale_Port_param[i].zoom = 4095.0f / (Grayscale_Port_param[i].maxVal - Grayscale_Port_param[i].minVal); //计算缩放比例
         Grayscale_Port_param[i].MedianVal = (Grayscale_Port_param[i].maxVal + Grayscale_Port_param[i].minVal) / 2; // 计算中值
         Grayscale_Port_param[i].offset = Grayscale_Port_param[i].minVal;
     }
@@ -152,7 +152,7 @@ void color_Grayscale(uint8_t r, uint8_t g, uint8_t b)
     HAL_Delay(1);//adc转换时间
     for(uint8_t i = 0; i < SENSORE_NUM; i++) //获取原始值
     {
-        Grayscale[i] = VAL4096_2_255(adcVal[i]);   
+        Grayscale[i] = adcVal[i];   
     }
 
     for(uint8_t i = 0; i < SENSORE_NUM; i++) 
@@ -163,6 +163,9 @@ void color_Grayscale(uint8_t r, uint8_t g, uint8_t b)
     
     for(uint8_t i = 0; i < SENSORE_NUM; i++) // 输出灰度值
     {
+        if(Grayscale[i] < 0) Grayscale[i] = 0;
+        Grayscale[i] = VAL4096_2_255(Grayscale[i]);
+
         Grayscale[i] = Grayscale[i]<=255 ? Grayscale[i] : 255;//放大限幅
         Grayscale[i] = Grayscale[i]>=0 ? Grayscale[i] : 0;
         GrayVal[i] = Grayscale[i];
@@ -170,6 +173,4 @@ void color_Grayscale(uint8_t r, uint8_t g, uint8_t b)
     // printf("max:%d, min:%d, \n",  maxVal, minVal);
     // printf("%3d %3d %3d %3d %3d %3d \n", GrayVal[0], GrayVal[1], GrayVal[2], GrayVal[3], GrayVal[4], GrayVal[5]);
 }
-
-
 

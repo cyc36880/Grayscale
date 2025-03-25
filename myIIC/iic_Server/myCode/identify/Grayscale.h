@@ -21,11 +21,11 @@ typedef struct
 
 typedef struct 
 {
-   uint8_t maxVal;
-   uint8_t minVal;
-   int16_t MedianVal;
+   int32_t maxVal;
+   int32_t minVal;
+   int32_t MedianVal;
    float zoom;
-   uint8_t offset;
+   int32_t offset;
 }Grayscale_Port;
 
 

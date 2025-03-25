@@ -6,7 +6,7 @@
  */
 #include "flash.h"
 
-#define FLASH_BUF_LEN  100
+#define FLASH_BUF_LEN  150
 
 static uint16_t flash_buf[FLASH_BUF_LEN] = {0};
 
@@ -65,7 +65,7 @@ static void updata_flash_data(uint16_t *data, uint16_t len)
 
     for(uint8_t i=0; i<len; i++)
     {
-         HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, MemoryAddr+i*2, data[i]);
+        HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, MemoryAddr+i*2, data[i]);
     }
     //4、锁住FLASH
     HAL_FLASH_Lock();

@@ -35,3 +35,4 @@ iic_server\color.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 iic_server\color.o: ../myCode/control/control.h
 iic_server\color.o: ../myCode/control/hsv.h
 iic_server\color.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+iic_server\color.o: ../myCode/control/flash.h

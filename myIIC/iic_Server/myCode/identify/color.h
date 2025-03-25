@@ -31,17 +31,19 @@
 #define HSV_WHITE     {198, 44, 13}    //白
 #define HSV_BLACK     {0, 0, 0}     //黑
 
+#define HSV_NONE      {0, 0, 0}     //无
 
 typedef struct{
     uint8_t rLight;
     uint8_t gLight;
     uint8_t bLight;
+    uint8_t studyFlag;
  }color_t;
 
 
 extern color_t colorControl; //颜色控制句柄
 
-extern const lv_color_hsv_t color_table[]; //颜色表
+extern lv_color_hsv_t color_table[]; //颜色表
 
 /**
  * @description: 颜色识别
@@ -52,7 +54,8 @@ extern const lv_color_hsv_t color_table[]; //颜色表
  */
 void Color_Recongnition(uint8_t r, uint8_t g, uint8_t b);
 extern uint8_t color[SENSORE_NUM]; //识别后的颜色索引
-
+void color_study(uint8_t w_color);
+void clear_color_study(void);
 void color_init(void);
 
 #endif
