@@ -217,7 +217,7 @@ void HAL_I2C_AddrCallback(I2C_HandleTypeDef *hi2c, uint8_t TransferDirection, ui
 	// 接收数据
 	else if(TransferDirection == I2C_DIRECTION_TRANSMIT)
 	{
-    HAL_I2C_Slave_Seq_Receive_IT(&hi2c1, iic_write_reg.reg, iic_write_reg.size, I2C_FIRST_FRAME);
+    HAL_I2C_Slave_Seq_Receive_IT(&hi2c1, iic_write_reg.reg, 1, I2C_FIRST_FRAME);
 	}
 }
 
@@ -236,6 +236,7 @@ void HAL_I2C_SlaveTxCpltCallback(I2C_HandleTypeDef *hi2c)  //全部发送完成�
 void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c)  //全部接收完成回调
 {
   UNUSED(hi2c);
+  HAL_I2C_Slave_Seq_Receive_IT(&hi2c1, iic_write_reg.reg, 1, I2C_FIRST_FRAME); // 防止主机误发送多个字节导致卡死
 	iic_write_reg.changle_flag = 1; // 接收完成
 }
 
