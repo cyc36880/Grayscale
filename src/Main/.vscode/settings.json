@@ -10,7 +10,8 @@
         "sys_config_and_flash.h": "c",
         "mymath.h": "c",
         "flash.h": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "adc.h": "c"
     },
     "cortex-debug.variableUseNaturalFormat": false
 }
