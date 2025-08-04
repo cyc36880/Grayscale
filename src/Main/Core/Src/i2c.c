@@ -32,8 +32,6 @@ static const uint8_t I2C_SLAVEADDRESS_OTHER1[] = {
     0x74,
 };
 
-static uint8_t iic_start_signal_flag = 0;
-
 /* USER CODE END 0 */
 
 I2C_HandleTypeDef hi2c1;
@@ -218,8 +216,7 @@ void HAL_I2C_AddrCallback(I2C_HandleTypeDef *hi2c, uint8_t TransferDirection, ui
 	// 接收数据
 	else if(TransferDirection == I2C_DIRECTION_TRANSMIT)
 	{
-    HAL_I2C_Slave_Seq_Receive_IT(&hi2c1, iic_write_reg.reg, 1, I2C_FIRST_FRAME);
-    iic_start_signal_flag = 0; // 开始信号标志
+    HAL_I2C_Slave_Seq_Receive_IT(&hi2c1, iic_write_reg.reg, iic_write_reg.size, I2C_FIRST_FRAME);
 	}
 }
 
@@ -237,14 +234,8 @@ void HAL_I2C_SlaveTxCpltCallback(I2C_HandleTypeDef *hi2c)  //全部发送完成�
 
 void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c)  //全部接收完成回调
 {
-  static uint8_t data_digestion;
   UNUSED(hi2c);
-  HAL_I2C_Slave_Seq_Receive_IT(&hi2c1, &data_digestion, 1, I2C_FIRST_FRAME); // 防止主机误发送多个字节导致卡死
-  if (0 == iic_start_signal_flag)
-  {
-    iic_start_signal_flag = 1; // 开始信号标志
-    iic_write_reg.changle_flag = 1; // 接收完成
-  }
+  iic_write_reg.changle_flag = 1; // 接收完成
 }
 
 
