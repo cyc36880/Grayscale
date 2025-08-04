@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "gray.h": "c",
+        "mymain.h": "c",
+        "binary.h": "c",
+        "color.h": "c",
+        "main.h": "c",
+        "register.h": "c",
+        "light.h": "c",
+        "sys_config_and_flash.h": "c",
+        "mymath.h": "c",
+        "flash.h": "c",
+        "cstdlib": "c"
+    },
+    "cortex-debug.variableUseNaturalFormat": false
+}

@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug with OpenOCD",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "openocd",
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/build/Debug/gray.elf", // 建议使用绝对路径变量
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f1x.cfg"
+            ],
+            // "runToMain": true,                  // 建议改成 runToMain 更标准
+            "runToEntryPoint": "main",
+            "svdFile": "${workspaceRoot}/STM32F103xx.svd", // 注意字段名为 svdFile
+            "showDevDebugOutput": "both",       // 用于调试问题时输出详细信息
+            "device": "STM32F103C8",            // 推荐明确指定芯片型号
+            "gdbPath": "arm-none-eabi-gdb"      // 如有多个 toolchain 可手动指定
+        }
+    ]
+}
