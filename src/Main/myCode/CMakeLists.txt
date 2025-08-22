@@ -16,6 +16,7 @@ set(Application_Src
     ${CMAKE_CURRENT_SOURCE_DIR}/src/binary.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/color.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/gray.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/photosensitive.c
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${Include_Dirs})

@@ -11,7 +11,8 @@
         "mymath.h": "c",
         "flash.h": "c",
         "cstdlib": "c",
-        "adc.h": "c"
+        "adc.h": "c",
+        "photosensitive.h": "c"
     },
     "cortex-debug.variableUseNaturalFormat": false
 }

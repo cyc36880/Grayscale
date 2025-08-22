@@ -10,6 +10,7 @@
 #include "./inc/gray.h"
 #include "./inc/color.h"
 #include "./inc/light.h"
+#include "./inc/photosensitive.h"
 
 
 typedef void (*key_func_cb)(void);
@@ -81,6 +82,7 @@ void setup(void)
     Grayscale_Init();
     binary_init();
     color_init();
+    photosensitive_init();
 
     iic_read_reg.reg = iic_read_reg_idle_val;
     iic_read_reg.size = 2;
@@ -148,6 +150,13 @@ void loop(void)
         iic_read_reg.size = REGISTER_NUM;
         color_study(machine_state - MACHINE_COLOR_RED_STUDY);
         machine_state = MACHINE_COLOR_IDENTIFY;
+    }
+    else if (MACHINE_COLOR_PHOTOSENSITIVE == machine_state) // 光敏值
+    {
+        photosensitive_val[SENSORE_NUM] = machine_state;
+        iic_read_reg.reg = photosensitive_val;
+        iic_read_reg.size = REGISTER_NUM;
+        photosensitive_identify();
     }
 
     // IIC 写入命令处理
