@@ -15,7 +15,7 @@ void photosensitive_init(void)
 
 void photosensitive_identify(void)
 {
-    set_rgb_brightness(1000, 1000, 1000);
+    set_rgb_brightness(0, 0, 0);
 
     for(uint8_t i = 0; i < SENSORE_NUM; i++) //获取原始值
     {
