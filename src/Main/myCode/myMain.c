@@ -45,10 +45,10 @@ static uint32_t adcVal[SENSORE_NUM];
 static KET_Typedef key_info = {KEY_IDLE};
 static MACHINE_STATE machine_state = MACHINE_IDLE;
 static const uint16_t other_addr_color[][3] = {
-    {1000, 1000, 1000},
-    {0, 1000, 1000},
-    {1000, 0, 1000},
+    {1000, 0, 0},
+    {0, 1000, 0},
     {0, 0, 1000},
+    {1000, 0, 1000},
 };
 
 
