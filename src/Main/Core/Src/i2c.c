@@ -31,7 +31,8 @@ static const uint8_t I2C_SLAVEADDRESS_OTHER1[] = {
     0x73,
     0x74,
 };
-
+static volatile uint8_t i2c_state = 0;
+static volatile uint8_t no_stop_count = 0;
 /* USER CODE END 0 */
 
 I2C_HandleTypeDef hi2c1;
@@ -92,9 +93,9 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle)
     __HAL_RCC_I2C1_CLK_ENABLE();
 
     /* I2C1 interrupt Init */
-    HAL_NVIC_SetPriority(I2C1_EV_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(I2C1_EV_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(I2C1_EV_IRQn);
-    HAL_NVIC_SetPriority(I2C1_ER_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(I2C1_ER_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(I2C1_ER_IRQn);
   /* USER CODE BEGIN I2C1_MspInit 1 */
 
@@ -195,10 +196,17 @@ static void I2C_Slave_Forced_UP()
  */
 void I2C_Slave_Reset(void)//初始化I2C从机接收态
 {
+  i2c_state = 0;
+  __HAL_RCC_I2C1_FORCE_RESET();   // 对 I2C1 外设寄存器复位
+  __HAL_RCC_I2C1_RELEASE_RESET(); // 释放复位，让 I2C1 重新初始化
+
 	HAL_I2C_DeInit(&hi2c1);		// 注销I2C
+  memset(&hi2c1, 0, sizeof(hi2c1));
+  memset(&hi2c1.Init, 0, sizeof(hi2c1.Init));
 	HAL_I2C_MspDeInit(&hi2c1);	// 注销引脚
 	I2C_Slave_Forced_UP(); // I2C引脚强制拉高，释放总线
-
+  HAL_I2C_MspInit(&hi2c1);		// 重新初始化引脚
+  // MX_I2C1_Init();
   i2c_init(I2C_SLAVEADDRESS_OTHER1[MAX_I2C_addr_get_other()]);//重新初始化iic
 	HAL_I2C_EnableListen_IT(&hi2c1);
 }
@@ -218,24 +226,30 @@ void HAL_I2C_AddrCallback(I2C_HandleTypeDef *hi2c, uint8_t TransferDirection, ui
 	{
     HAL_I2C_Slave_Seq_Receive_IT(&hi2c1, iic_write_reg.reg, iic_write_reg.size, I2C_FIRST_FRAME);
 	}
+  i2c_state = 1;
 }
 
 
 void HAL_I2C_ListenCpltCallback(I2C_HandleTypeDef *hi2c)  //监听中断回调
 {
 	HAL_I2C_EnableListen_IT(hi2c); // Restart
+  i2c_state = 0;
+  no_stop_count = 0;
 }
 
 
 void HAL_I2C_SlaveTxCpltCallback(I2C_HandleTypeDef *hi2c)  //全部发送完成回调
 {
   UNUSED(hi2c);
+  no_stop_count = 0;
 }
 
 void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c)  //全部接收完成回调
 {
   UNUSED(hi2c);
   iic_write_reg.changle_flag = 1; // 接收完成
+  i2c_state = 0;
+  no_stop_count = 0;
 }
 
 
@@ -245,6 +259,20 @@ void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
   {
   }
   I2C_Slave_Reset();
+  no_stop_count = 0;
+}
+
+void i2c_time_1ms_callback(void)
+{
+  if (i2c_state)
+  {
+    no_stop_count++;
+    if (no_stop_count > 5)
+    {
+      no_stop_count = 0;
+      I2C_Slave_Reset();
+    }
+  }
 }
 
 /* USER CODE END 1 */

@@ -21,7 +21,7 @@
 #include "tim.h"
 
 /* USER CODE BEGIN 0 */
-
+void i2c_time_1ms_callback(void);
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim1;
@@ -155,5 +155,9 @@ void HAL_TIM_PWM_MspDeInit(TIM_HandleTypeDef* tim_pwmHandle)
 }
 
 /* USER CODE BEGIN 1 */
-
+void HAL_IncTick(void)
+{
+  uwTick += uwTickFreq;
+  i2c_time_1ms_callback();
+}
 /* USER CODE END 1 */
