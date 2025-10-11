@@ -241,6 +241,7 @@ void HAL_I2C_ListenCpltCallback(I2C_HandleTypeDef *hi2c)  //监听中断回调
 void HAL_I2C_SlaveTxCpltCallback(I2C_HandleTypeDef *hi2c)  //全部发送完成回调
 {
   UNUSED(hi2c);
+  i2c_state = 0;
   no_stop_count = 0;
 }
 
