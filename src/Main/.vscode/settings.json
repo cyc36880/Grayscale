@@ -12,7 +12,8 @@
         "flash.h": "c",
         "cstdlib": "c",
         "adc.h": "c",
-        "photosensitive.h": "c"
+        "photosensitive.h": "c",
+        "cmath": "c"
     },
     "cortex-debug.variableUseNaturalFormat": false
 }

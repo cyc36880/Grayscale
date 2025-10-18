@@ -82,7 +82,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+  
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -101,7 +101,7 @@ int main(void)
 		{
 			pFunction JumpToApplication;
 			uint32_t JumpAddress;
-			
+			__disable_irq();
 			HAL_RCC_DeInit(); //
 			SCB->VTOR = APPLICATION_ADDRESS; //设置中断向量偏移地址
 			/* execute the new program */

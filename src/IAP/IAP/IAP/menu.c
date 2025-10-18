@@ -195,6 +195,7 @@ void Main_Menu(void)
 //      break;
     case '2' :
       Serial_PutString((uint8_t *)"Start program execution......\r\n\n");
+            __disable_irq();
 			HAL_RCC_DeInit(); //对RCC进行DeInit操作，防止APP卡死
 			SCB->VTOR = APPLICATION_ADDRESS; //设置中断向量偏移地址
       /* execute the new program */

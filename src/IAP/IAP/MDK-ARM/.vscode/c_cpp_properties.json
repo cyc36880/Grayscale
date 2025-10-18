@@ -3,17 +3,15 @@
         {
             "name": "demo",
             "includePath": [
-                "d:\\Desktop\\灰度\\pro\\IAP\\IAP\\Core\\Inc",
-                "d:\\Desktop\\灰度\\pro\\IAP\\IAP\\Drivers\\STM32F1xx_HAL_Driver\\Inc",
-                "d:\\Desktop\\灰度\\pro\\IAP\\IAP\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
-                "d:\\Desktop\\灰度\\pro\\IAP\\IAP\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
-                "d:\\Desktop\\灰度\\pro\\IAP\\IAP\\Drivers\\CMSIS\\Include",
-                "d:\\Desktop\\灰度\\pro\\IAP\\IAP\\IAP",
-                "D:\\Keil_v5\\ARM\\ARMCC\\include",
-                "D:\\Keil_v5\\ARM\\ARMCC\\include\\rw",
-                "d:\\Desktop\\灰度\\pro\\IAP\\IAP\\MDK-ARM",
-                "d:\\Desktop\\灰度\\pro\\IAP\\IAP\\Core\\Src",
-                "d:\\Desktop\\灰度\\pro\\IAP\\IAP\\Drivers\\STM32F1xx_HAL_Driver\\Src"
+                "d:\\Desktop\\chengxu\\Grayscale\\src\\IAP\\IAP\\Core\\Inc",
+                "d:\\Desktop\\chengxu\\Grayscale\\src\\IAP\\IAP\\Drivers\\STM32F1xx_HAL_Driver\\Inc",
+                "d:\\Desktop\\chengxu\\Grayscale\\src\\IAP\\IAP\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
+                "d:\\Desktop\\chengxu\\Grayscale\\src\\IAP\\IAP\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
+                "d:\\Desktop\\chengxu\\Grayscale\\src\\IAP\\IAP\\Drivers\\CMSIS\\Include",
+                "d:\\Desktop\\chengxu\\Grayscale\\src\\IAP\\IAP\\IAP",
+                "d:\\Desktop\\chengxu\\Grayscale\\src\\IAP\\IAP\\MDK-ARM",
+                "d:\\Desktop\\chengxu\\Grayscale\\src\\IAP\\IAP\\Core\\Src",
+                "d:\\Desktop\\chengxu\\Grayscale\\src\\IAP\\IAP\\Drivers\\STM32F1xx_HAL_Driver\\Src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

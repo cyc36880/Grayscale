@@ -69,17 +69,15 @@
 
  When the module operates in Color Recognition Mode (Command 1) or related learning modes, the first 6 bytes of the returned data correspond to the color types of each channel. The specific mappings are as follows:
 
- |        Color Type | Return Identifier (Decimal) |
- | ----------------: | :-------------------------: |
- | No Color Detected |              0              |
- |               Red |              1              |
- |             Green |              2              |
- |              Blue |              3              |
- |            Yellow |              4              |
- |              Cyan |              5              |
- |            Purple |              6              |
- |             Black |              7              |
- |             White |              8              |
+|        Color Type | Return Identifier (Decimal) |
+| ----------------: | :-------------------------: |
+| No Color Detected |              0              |
+|               Red |              1              |
+|             Green |              2              |
+|              Blue |              3              |
+|            Yellow |              4              |
+|              Cyan |              5              |
+|            Purple |              6              |
 
  > **Note**: These identifiers directly map the sensor's classification results for target colors and can be used for subsequent logic judgments or display outputs.
 
